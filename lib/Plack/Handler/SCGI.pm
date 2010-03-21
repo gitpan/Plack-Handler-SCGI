@@ -2,7 +2,7 @@ package Plack::Handler::SCGI;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use SCGI;
 use IO::Socket;
@@ -68,6 +68,7 @@ sub handle_request {
         'psgi.run_once'     => Plack::Util::FALSE,
         'psgi.streaming'    => Plack::Util::TRUE,
         'psgi.nonblocking'  => Plack::Util::FALSE,
+        'psgix.input.buffered' => Plack::Util::FALSE,
     };
 
     my $res = Plack::Util::run_app $app, $env;
